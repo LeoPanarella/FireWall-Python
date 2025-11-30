@@ -1,111 +1,84 @@
-📘 Firewall Security — Advanced Packet Filtering & Network Threat Detection System
+# Firewall Security – Advanced Packet Filtering & Threat Detection
 
-Firewall Security is a modular, extensible, and research-focused project designed for advanced learning and practical experimentation in cybersecurity, network traffic analysis, and threat detection.
+![Build Status](https://img.shields.io/badge/build-stable-brightgreen)
+![Python Version](https://img.shields.io/badge/python-3.10+-blue)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
 
-This system simulates real firewall behavior, including:
+Firewall Security is an advanced packet filtering, monitoring, and threat detection system designed for cybersecurity studies, SOC training, and network traffic analysis.
 
-packet inspection,
+## Project Structure
+```
+📁 README.md
+📁 firewall.py
+📁 monitor.py
+📁 scanner.py
+📁 utils.py
+📂 configs/
+   ├── rules.json
+   ├── whitelist.txt
+   └── blacklist.txt
+📂 logs/
+   └── firewall.log
+```
 
-dynamic rule enforcement,
+## rules.json Example
+```json
+{
+    "block_ports": [23, 445],
+    "allow_ports": [80, 443],
+    "alert_ports": [21],
+    "dos_threshold": 40
+}
+```
 
-access control lists,
+## Demonstrations
 
-anomaly detection,
+### Firewall Simulation
+```
+[BLOCK] 192.168.1.16 → rule-matched
+[ALLOW] 192.168.1.15 → whitelist
+[ALLOW] 192.168.1.19 → random-check OK
+```
 
-automated threat response.
+### DoS Detection
+```
+THRESHOLD: 40 pkts/s
+Monitoring traffic…
+⚠️ BLOCKED 192.168.2.19 (40.32 pkts/s)
+```
 
-Ideal for professionals, advanced students, and analysts who want hands-on experience with defensive security mechanisms used in real infrastructures.
+## Features
+- ⚡ Real-time packet monitoring  
+- 🔥 Automatic rule-based blocking  
+- 🚨 DoS detection via threshold  
+- 🛑 Whitelist & blacklist support  
+- 📝 Log generation + rotation  
+- 🧪 Simulation mode (no sudo)
 
-🚀 Key Features
+## Challenges Faced
+- Root sniffer → simulation mode added  
+- High packet volume → lightweight loop  
+- DoS threshold tuning → JSON-based  
+- Port conflicts → auto-detected early  
+- Log growth → manual rotation system  
 
-Intelligent packet filtering
-Custom rules to allow, block, or alert based on ports, IPs, and behavioral triggers.
-
-DoS & anomaly detection
-Real-time packet rate analysis with automatic blocking when thresholds are reached.
-
-Integrated packet sniffer (optional)
-Real traffic capture and analysis using Scapy.
-
-Professional whitelist / blacklist system
-Granular access control for trusted and untrusted sources.
-
-Structured logging system
-Essential for auditing and forensic analysis.
-
-Modular architecture
-Fully extensible for custom security modules.
-
-📂 Project Structure
-Firewall-Security/
-│
-├── README.md
-├── firewall.py
-├── monitor.py
-├── scanner.py
-├── utils.py
-│
-├── configs/
-│   ├── rules.json
-│   ├── whitelist.txt
-│   └── blacklist.txt
-│
-└── logs/
-    └── firewall.log
-
-🧪 Demonstrations
-📝 Log example
-[Firewall] Blocking Nimda — Source IP: 192.168.2.36
-
-🚨 DoS attack detection & mitigation
-
-Firewall analysis:
-
-THRESHOLD = 40
-Monitoring network traffic...
-
-Blocking IP: 192.168.2.19 | packet rate: 40.32 pkts/s
-
-
-Attacker generating packets:
-
-Sent 1 packet.
-Sent 1 packet.
-Sent 1 packet.
-...
-
-🔥 Firewall simulation
-IP: 192.168.1.16  | Action: BLOCK | Reason: rule-matched
-IP: 192.168.1.15  | Action: ALLOW | Reason: whitelist
-IP: 192.168.1.19  | Action: ALLOW | Random check: OK
-
-🛠️ Installation
+## Installation
+```bash
+git clone https://github.com/LeoPanarella/FireWall-Python.git
+cd FireWall-Python
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-pip install scapy   # optional
+```
 
-▶️ Execution
-python3 firewall.py
-python3 monitor.py
-sudo python3 monitor.py  # for sniffing mode
+## Usage
+```bash
+sudo python3 firewall.py
+python3 monitor.py --simulate
+```
 
-⚙️ Rule Configuration
+## Author
+Developed by Leonardo Panarella
 
-Example rules.json:
-
-{
-  "block_ports": [23, 445],
-  "allow_ports": [80, 443],
-  "alert_ports": [21]
-}
-
-⚠️ Notice
-
-This project is for educational purposes only.
-Network analysis should only be performed on authorized environments.
-
-👤 Author
-
-Leonardo Panarella Neto
-GitHub: https://github.com/LeoPanarella
+## License
+MIT License
